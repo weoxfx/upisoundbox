@@ -33,8 +33,6 @@
         <item name="cardCornerRadius">20dp</item>
         <item name="cardElevation">0dp</item>
         <item name="contentPadding">20dp</item>
-        <item name="cardStrokeColor">@color/outline_dark</item>
-        <item name="cardStrokeWidth">1dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.Button" parent="Widget.Material3.Button">
@@ -97,41 +95,40 @@
         <item name="android:textColor">@color/on_surface_dark</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Display">
-        <item name="android:textSize">32sp</item>
+    <style name="TextAppearance.UPISoundBox" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textColor">@color/on_surface_dark</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Display" parent="TextAppearance.UPISoundBox">
+        <item name="android:textSize">32sp</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:letterSpacing">-0.5</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Headline">
+    <style name="TextAppearance.UPISoundBox.Headline" parent="TextAppearance.UPISoundBox">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/on_surface_dark</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">-0.3</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Title">
+    <style name="TextAppearance.UPISoundBox.Title" parent="TextAppearance.UPISoundBox">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/on_surface_dark</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Body">
+    <style name="TextAppearance.UPISoundBox.Body" parent="TextAppearance.UPISoundBox">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/on_surface_dark</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:alpha">0.8</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Caption">
+    <style name="TextAppearance.UPISoundBox.Caption" parent="TextAppearance.UPISoundBox">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/on_surface_dark</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:alpha">0.5</item>
     </style>
 
-    <style name="TextAppearance.UPISoundBox.Overline">
+    <style name="TextAppearance.UPISoundBox.Overline" parent="TextAppearance.UPISoundBox">
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/accent_cyan</item>
         <item name="android:fontFamily">sans-serif-medium</item>
