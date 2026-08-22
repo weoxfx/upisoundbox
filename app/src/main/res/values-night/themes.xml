@@ -28,17 +28,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="GlassCard">
-        <item name="android:background">@drawable/glass_dark</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:elevation">4dp</item>
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardPreventCornerOverlap">true</item>
-    </style>
-
-    <style name="GlassCard.Light">
-        <item name="android:background">@drawable/glass_light</item>
+    <style name="Widget.UPISoundBox.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface_glass</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="contentPadding">20dp</item>
+        <item name="cardStrokeColor">@color/outline_dark</item>
+        <item name="cardStrokeWidth">1dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.Button" parent="Widget.Material3.Button">
@@ -46,30 +42,39 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
-        <item name="cornerRadius">12dp</item>
-        <item name="elevation">2dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:letterSpacing">0.3</item>
     </style>
 
     <style name="Widget.UPISoundBox.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="strokeColor">@color/outline_dark</item>
         <item name="strokeWidth">1dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="cornerRadius">14dp</item>
     </style>
 
-    <style name="Widget.UPISoundBox.Card" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardBackgroundColor">@color/surface_glass_dark</item>
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="contentPadding">16dp</item>
+    <style name="Widget.UPISoundBox.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:backgroundTint">@color/surface_glass_light</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="cornerRadius">14dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
         <item name="itemBackground">@android:color/transparent</item>
         <item name="itemTextColor">@color/on_surface_dark</item>
         <item name="itemIconTint">@color/on_surface_dark</item>
-        <item name="backgroundTint">@color/surface_glass_dark</item>
-        <item name="elevation">8dp</item>
+        <item name="backgroundTint">@color/surface_glass</item>
+        <item name="elevation">0dp</item>
         <item name="itemActiveIndicatorStyle">@style/Widget.UPISoundBox.BottomNavigation.ActiveIndicator</item>
     </style>
 
@@ -85,5 +90,52 @@
     <style name="Widget.UPISoundBox.BottomNavigation.Active">
         <item name="android:textColor">@color/accent_cyan</item>
         <item name="android:iconTint">@color/accent_cyan</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/accent_cyan</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Display">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:letterSpacing">-0.5</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Headline">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.3</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:alpha">0.5</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.Overline">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/accent_cyan</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">1.0</item>
     </style>
 </resources>
