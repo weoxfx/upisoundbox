@@ -1,130 +1,41 @@
-package com.weox.upisoundbox.service
+package com.weox.upisoundbox.ui
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.media.AudioAttributes
-import android.media.AudioFocusRequest
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.service.notification.NotificationListenerService
-import android.service.notification.StatusBarNotification
-import android.util.Log
-import com.weox.upisoundbox.net.VoiceCache
-import com.weox.upisoundbox.parser.ParserRegistry
-import com.weox.upisoundbox.parser.PaymentEvent
+import androidx.core.app.NotificationCompat
 
-class UpiNotificationListenerService : NotificationListenerService() {
+/**
+ * DEBUG helper: posts a notification from this app itself, worded so that
+ * TestSelfParser recognizes it. This lets you verify the entire pipeline
+ * (listener -> parser -> voice cache/backend -> volume boost -> playback)
+ * without needing GPay/PhonePe/Paytm installed or a real payment.
+ */
+object TestNotificationSender {
+    private const val CHANNEL_ID = "upi_sound_box_test"
+    private const val NOTIFICATION_ID = 9001
 
-    private lateinit var audioManager: AudioManager
+    fun sendTestPayment(context: Context, amountRupees: Double) {
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    override fun onCreate() {
-        super.onCreate()
-        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        Log.d(TAG, "Service onCreate — listener process started")
-    }
-
-    override fun onListenerConnected() {
-        super.onListenerConnected()
-        Log.d(TAG, "onListenerConnected — system has bound the listener")
-    }
-
-    override fun onListenerDisconnected() {
-        super.onListenerDisconnected()
-        Log.d(TAG, "onListenerDisconnected — system unbound the listener")
-    }
-
-    override fun onNotificationPosted(sbn: StatusBarNotification) {
-        val pkg = sbn.packageName
-        Log.d(TAG, "onNotificationPosted from package: $pkg")
-
-        // Only look at apps in our known list — cheap early exit for everything else.
-        val parser = ParserRegistry.forPackage(pkg)
-        if (parser == null) {
-            Log.d(TAG, "No parser registered for $pkg, ignoring")
-            return
+        if (manager.getNotificationChannel(CHANNEL_ID) == null) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                "Test payments",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            manager.createNotificationChannel(channel)
         }
 
-        // Our own package (test notifications) always passes through —
-        // it's never something the user "selects" in onboarding.
-        val isSelfTest = pkg == applicationContext.packageName
-        if (!isSelfTest) {
-            val selectedApps = SelectedAppsStore.getSelected(applicationContext)
-            if (pkg !in selectedApps) return
-        }
-
-        val extras = sbn.notification.extras
-        val title = extras.getCharSequence("android.title")?.toString()
-        val text = extras.getCharSequence("android.text")?.toString()
-        Log.d(TAG, "Notification content — title: '$title', text: '$text'")
-
-        val event = parser.tryParse(title, text)
-        if (event == null) {
-            Log.d(TAG, "Parser did not recognize this as a payment notification")
-            return
-        }
-        Log.d(TAG, "Parsed payment: $event")
-
-        handlePaymentEvent(event)
-    }
-
-    private fun handlePaymentEvent(event: PaymentEvent) {
-        // Fetch cached/generated audio for this amount, then play it.
-        VoiceCache.getAudioForAmount(applicationContext, event.amountRupees) { audioFilePath ->
-            if (audioFilePath == null) {
-                Log.e(TAG, "No audio available for amount ${event.amountRupees}")
-                return@getAudioForAmount
-            }
-            playAlert(audioFilePath)
-        }
-    }
-
-    private fun playAlert(filePath: String) {
-        // Bump the ALARM stream specifically — USAGE_ALARM below routes
-        // playback through that stream, not STREAM_MUSIC, so raising the
-        // wrong one leaves the alert silent even though everything else works.
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_ALARM,
-            maxVolume,
-            0
-        )
-        Log.d(TAG, "Set STREAM_ALARM volume to max ($maxVolume)")
-
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_ALARM) // behaves closer to an alarm than background music
-            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+        // "TESTPAY" is the marker TestSelfParser looks for — must match exactly.
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(android.R.drawable.stat_notify_chat)
+            .setContentTitle("TESTPAY received")
+            .setContentText("₹$amountRupees received from Test User")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .build()
 
-        val focusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
-            .setAudioAttributes(audioAttributes)
-            .build()
-        audioManager.requestAudioFocus(focusRequest)
-
-        try {
-            MediaPlayer().apply {
-                setAudioAttributes(audioAttributes)
-                setDataSource(filePath)
-                setOnCompletionListener {
-                    audioManager.abandonAudioFocusRequest(focusRequest)
-                    release()
-                }
-                setOnErrorListener { _, what, extra ->
-                    Log.e(TAG, "MediaPlayer error: what=$what extra=$extra")
-                    true
-                }
-                prepare()
-                start()
-                Log.d(TAG, "Playback started for $filePath")
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Playback failed", e)
-        }
-    }
-
-    override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        // No-op — we only care about notifications as they arrive.
-    }
-
-    companion object {
-        private const val TAG = "UpiSoundBox"
+        manager.notify(NOTIFICATION_ID, notification)
     }
 }
