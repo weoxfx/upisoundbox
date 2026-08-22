@@ -1,12 +1,16 @@
 package com.weox.upisoundbox.ui
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.weox.upisoundbox.databinding.ActivityMainBinding
 import com.weox.upisoundbox.parser.ParserRegistry
 import com.weox.upisoundbox.service.SelectedAppsStore
@@ -27,6 +31,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val installedApps = mutableListOf<Pair<String, String>>() // packageName to label
 
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (!granted) {
+            Toast.makeText(
+                this,
+                "Notification permission denied — the app can't post the test alert without it.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         detectInstalledUpiApps()
         renderAppList()
+        requestNotificationPermissionIfNeeded()
 
         binding.grantNotificationAccessButton.setOnClickListener {
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
@@ -44,12 +61,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.sendTestNotificationButton.setOnClickListener {
+            if (!hasNotificationPermission()) {
+                requestNotificationPermissionIfNeeded()
+                Toast.makeText(
+                    this,
+                    "Grant notification permission first, then tap test again.",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
             TestNotificationSender.sendTestPayment(this, amountRupees = 50.0)
             Toast.makeText(
                 this,
                 "Test notification sent. If notification access is granted, you should hear the alert.",
                 Toast.LENGTH_LONG
             ).show()
+        }
+    }
+
+    private fun hasNotificationPermission(): Boolean {
+        // Only relevant on Android 13+ — earlier versions never needed this permission.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return true
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        if (!hasNotificationPermission()) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
