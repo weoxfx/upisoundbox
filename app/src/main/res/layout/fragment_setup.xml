@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingTop="8dp"
+         android:paddingTop="4dp"
         android:paddingBottom="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Setup Guide"
-            android:textSize="28sp"
+             android:textSize="30sp"
             android:textColor="@color/on_surface_dark"
             android:fontFamily="sans-serif-light"
             android:letterSpacing="-0.5"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/surface_glass"
-            app:cardCornerRadius="20dp"
+             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:contentPadding="20dp"
             app:strokeColor="@color/outline_dark"
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/surface_glass"
-            app:cardCornerRadius="20dp"
+             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:contentPadding="20dp"
             app:strokeColor="@color/outline_dark"
@@ -148,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/surface_glass"
-            app:cardCornerRadius="20dp"
+             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:contentPadding="20dp"
             app:strokeColor="@color/outline_dark"
@@ -205,7 +205,7 @@
             android:layout_height="56dp"
             android:text="@string/start_setup"
             android:textSize="16sp"
-            android:backgroundTint="@color/primary_40"
+             android:backgroundTint="@color/accent_cyan"
             android:letterSpacing="0.3"
             android:layout_marginTop="8dp" />
 

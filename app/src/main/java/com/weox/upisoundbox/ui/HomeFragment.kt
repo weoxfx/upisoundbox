@@ -76,11 +76,21 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardQuickApps.setOnClickListener {
-            (activity as? MainActivity)?.loadFragment(AppsFragment())
+            (activity as? MainActivity)?.let {
+                it.loadFragment(AppsFragment())
+                it.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.bottom_nav
+                ).selectedItemId = R.id.nav_apps
+            }
         }
 
         binding.cardQuickHistory.setOnClickListener {
-            (activity as? MainActivity)?.loadFragment(HistoryFragment())
+            (activity as? MainActivity)?.let {
+                it.loadFragment(HistoryFragment())
+                it.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.bottom_nav
+                ).selectedItemId = R.id.nav_history
+            }
         }
 
         val isActive = isNotificationListenerEnabled()

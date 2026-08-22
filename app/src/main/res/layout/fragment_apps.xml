@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingTop="8dp"
+         android:paddingTop="4dp"
         android:paddingBottom="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/select_upi_apps"
-            android:textSize="28sp"
+             android:textSize="30sp"
             android:textColor="@color/on_surface_dark"
             android:fontFamily="sans-serif-light"
             android:letterSpacing="-0.5"
@@ -47,10 +47,10 @@
             android:id="@+id/btn_save_selection"
             style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+             android:layout_height="52dp"
             android:text="@string/save_selection"
             android:textSize="16sp"
-            android:backgroundTint="@color/primary_40"
+             android:backgroundTint="@color/accent_cyan"
             android:letterSpacing="0.3"
             android:layout_marginTop="8dp" />
 

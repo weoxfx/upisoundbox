@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.UPISoundBox" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary_40</item>
+        <item name="colorPrimary">@color/accent_cyan</item>
         <item name="colorPrimaryVariant">@color/primary_30</item>
         <item name="colorOnPrimary">@color/on_primary_dark</item>
         <item name="colorSecondary">@color/accent_cyan</item>
@@ -17,8 +17,8 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:enforceNavigationBarContrast">false</item>
         <item name="android:enforceStatusBarContrast">false</item>
     </style>
@@ -30,7 +30,7 @@
 
     <style name="Widget.UPISoundBox.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="cardBackgroundColor">@color/surface_glass</item>
-        <item name="cardCornerRadius">20dp</item>
+        <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">0dp</item>
         <item name="contentPadding">20dp</item>
     </style>
@@ -42,7 +42,7 @@
         <item name="android:paddingEnd">24dp</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
-        <item name="cornerRadius">14dp</item>
+        <item name="cornerRadius">10dp</item>
         <item name="elevation">0dp</item>
         <item name="android:letterSpacing">0.3</item>
     </style>
@@ -54,7 +54,7 @@
         <item name="android:paddingEnd">24dp</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
-        <item name="cornerRadius">14dp</item>
+        <item name="cornerRadius">10dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
@@ -64,7 +64,7 @@
         <item name="android:paddingEnd">24dp</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
-        <item name="cornerRadius">14dp</item>
+        <item name="cornerRadius">10dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.BottomNavigation" parent="Widget.Material3.BottomNavigationView">

@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
-    android:paddingTop="8dp"
+         android:paddingTop="4dp"
     android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/payment_history"
-        android:textSize="28sp"
+         android:textSize="30sp"
         android:textColor="@color/on_surface_dark"
         android:fontFamily="sans-serif-light"
         android:letterSpacing="-0.5"
@@ -33,9 +33,9 @@
         android:id="@+id/btn_clear_history"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+         android:layout_height="46dp"
         android:text="@string/clear_history"
-        android:textSize="14sp"
+         android:textSize="13sp"
         android:layout_marginBottom="16dp"
         android:icon="@drawable/ic_history"
         app:iconGravity="textStart"
