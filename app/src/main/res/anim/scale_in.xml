@@ -5,6 +5,6 @@
     android:fromYScale="0.8"
     android:toXScale="1.0"
     android:toYScale="1.0"
-    android:interpolator="@android:anim/fast_out_slow_in"
+    android:interpolator="@android:interpolator/fast_out_slow_in"
     android:pivotX="50%"
     android:pivotY="50%" />

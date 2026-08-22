@@ -72,8 +72,8 @@
                         android:text="@string/grant_notification_access"
                         android:textSize="14sp"
                         android:icon="@drawable/ic_notification"
-                        android:iconGravity="textStart"
-                        android:iconPadding="8dp" />
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -109,8 +109,8 @@
                         android:textSize="14sp"
                         android:backgroundTint="@color/primary_40"
                         android:icon="@drawable/ic_volume"
-                        android:iconGravity="textStart"
-                        android:iconPadding="8dp" />
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

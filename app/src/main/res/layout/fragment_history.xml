@@ -37,8 +37,8 @@
         android:textSize="14sp"
         android:layout_marginBottom="16dp"
         android:icon="@drawable/ic_history"
-        android:iconGravity="textStart"
-        android:iconPadding="8dp" />
+        app:iconGravity="textStart"
+        app:iconPadding="8dp" />
 
     <LinearLayout
         android:id="@+id/layout_empty_state"
