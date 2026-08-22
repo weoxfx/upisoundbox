@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(HomeFragment())
                     true
                 }
+                R.id.nav_setup -> {
+                    loadFragment(SetupFragment())
+                    true
+                }
                 R.id.nav_apps -> {
                     loadFragment(AppsFragment())
                     true

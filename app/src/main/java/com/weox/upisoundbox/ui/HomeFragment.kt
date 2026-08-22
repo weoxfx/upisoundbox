@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.weox.upisoundbox.R
 import com.weox.upisoundbox.databinding.FragmentHomeBinding
 import com.weox.upisoundbox.service.PaymentHistoryStore
+import com.weox.upisoundbox.service.SelectedAppsStore
 import com.weox.upisoundbox.service.UpiNotificationListenerService
 import com.weox.upisoundbox.ui.TestNotificationSender
 
@@ -70,6 +71,18 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.test_sent, Toast.LENGTH_SHORT).show()
         }
 
+        binding.cardQuickAccess.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+        }
+
+        binding.cardQuickApps.setOnClickListener {
+            (activity as? MainActivity)?.loadFragment(AppsFragment())
+        }
+
+        binding.cardQuickHistory.setOnClickListener {
+            (activity as? MainActivity)?.loadFragment(HistoryFragment())
+        }
+
         val isActive = isNotificationListenerEnabled()
         updateStatusUI(isActive)
     }
@@ -78,9 +91,11 @@ class HomeFragment : Fragment() {
         val context = requireContext()
         val total = PaymentHistoryStore.getTotalCount(context)
         val today = PaymentHistoryStore.getTodayCount(context)
+        val activeApps = SelectedAppsStore.getSelected(context).size
 
         binding.tvTotalCount.text = total.toString()
         binding.tvTodayCount.text = today.toString()
+        binding.tvActiveApps.text = activeApps.toString()
 
         val recent = PaymentHistoryStore.getHistory(context).take(3)
         updateRecentActivity(recent)
@@ -161,19 +176,28 @@ class HomeFragment : Fragment() {
         val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
         val scaleIn = AnimationUtils.loadAnimation(context, R.anim.scale_in)
 
-        binding.cardTotal.startAnimation(slideUp)
+        binding.cardStatus.startAnimation(slideUp)
+        binding.cardStatus.postDelayed({
+            binding.cardQuickAccess.startAnimation(slideUp)
+        }, 80)
+        binding.cardQuickAccess.postDelayed({
+            binding.cardQuickApps.startAnimation(slideUp)
+        }, 160)
+        binding.cardQuickApps.postDelayed({
+            binding.cardQuickHistory.startAnimation(slideUp)
+        }, 240)
+        binding.cardQuickHistory.postDelayed({
+            binding.cardTotal.startAnimation(slideUp)
+        }, 320)
         binding.cardTotal.postDelayed({
             binding.cardToday.startAnimation(slideUp)
-        }, 80)
+        }, 400)
         binding.cardToday.postDelayed({
-            binding.cardStatus.startAnimation(slideUp)
-        }, 160)
-        binding.cardStatus.postDelayed({
+            binding.cardAppsCount.startAnimation(slideUp)
+        }, 480)
+        binding.cardAppsCount.postDelayed({
             binding.cardRecent.startAnimation(slideUp)
-        }, 240)
-
-        binding.tvGreeting.startAnimation(fadeIn)
-        binding.tvSubtitle.startAnimation(fadeIn)
+        }, 560)
     }
 
     override fun onResume() {

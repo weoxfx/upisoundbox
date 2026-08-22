@@ -41,6 +41,17 @@
     <string name="permission_denied">Notification permission denied</string>
     <string name="grant_permission_first">Grant notification permission first</string>
     <string name="test_sent">Test notification sent</string>
+    <string name="start_setup">Start Setup</string>
+    <string name="setup_guide">Setup Guide</string>
+    <string name="setup_subtitle">Get started in 3 easy steps</string>
+    <string name="step1_title">Grant Notification Access</string>
+    <string name="step1_desc">Allow the app to read UPI payment notifications</string>
+    <string name="step2_title">Select UPI Apps</string>
+    <string name="step2_desc">Choose which payment apps to monitor</string>
+    <string name="step3_title">Test &amp; Listen</string>
+    <string name="step3_desc">Send a test alert to verify everything works</string>
+    <string name="recent_activity">Recent Activity</string>
+    <string name="quick_actions">Quick Actions</string>
     <string name="listening_for_payments">Listening for payments</string>
     <string name="stop_listening">Stop Listening</string>
     <string name="start_listening">Start Listening</string>
