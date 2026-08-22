@@ -172,9 +172,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun animateEntrance() {
-        val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-        val scaleIn = AnimationUtils.loadAnimation(context, R.anim.scale_in)
 
         binding.cardStatus.startAnimation(slideUp)
         binding.cardStatus.postDelayed({

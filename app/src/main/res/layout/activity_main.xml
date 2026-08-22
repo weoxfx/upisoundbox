@@ -5,6 +5,42 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.UPISoundBox"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sound Box"
+                android:textSize="32sp"
+                android:textColor="@color/on_surface_dark"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="-0.5"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPI Payment Announcer"
+                android:textSize="14sp"
+                android:textColor="@color/accent_cyan"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.8"
+                android:textAllCaps="true" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"
@@ -20,6 +56,7 @@
         style="@style/Widget.UPISoundBox.BottomNavigation"
         app:itemIconTint="@drawable/nav_selector"
         app:itemTextColor="@drawable/nav_selector"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

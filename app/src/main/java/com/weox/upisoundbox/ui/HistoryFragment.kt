@@ -65,9 +65,11 @@ class HistoryFragment : Fragment() {
         if (history.isEmpty()) {
             binding.rvHistory.visibility = View.GONE
             binding.btnClearHistory.visibility = View.GONE
+            binding.layoutEmptyState.visibility = View.VISIBLE
         } else {
             binding.rvHistory.visibility = View.VISIBLE
             binding.btnClearHistory.visibility = View.VISIBLE
+            binding.layoutEmptyState.visibility = View.GONE
         }
     }
 

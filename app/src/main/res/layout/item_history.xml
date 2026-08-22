@@ -5,8 +5,10 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/surface_glass_dark"
     app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
+    app:cardElevation="0dp"
     app:contentPadding="16dp"
+    app:strokeColor="@color/outline_dark"
+    app:strokeWidth="1dp"
     android:layout_marginBottom="12dp">
 
     <LinearLayout
@@ -41,9 +43,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹500"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textColor="@color/on_surface_dark"
-                    android:fontFamily="sans-serif-light" />
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="-0.3" />
 
                 <TextView
                     android:id="@+id/tv_source"
@@ -52,7 +55,7 @@
                     android:text="GPay"
                     android:textSize="13sp"
                     android:textColor="@color/on_surface_dark"
-                    android:alpha="0.6"
+                    android:alpha="0.5"
                     android:fontFamily="sans-serif"
                     android:layout_marginTop="2dp" />
             </LinearLayout>
@@ -64,7 +67,7 @@
                 android:text="2 min ago"
                 android:textSize="12sp"
                 android:textColor="@color/on_surface_dark"
-                android:alpha="0.5"
+                android:alpha="0.4"
                 android:fontFamily="sans-serif"
                 android:gravity="end" />
         </LinearLayout>
@@ -76,9 +79,9 @@
             android:text="Raw notification text"
             android:textSize="12sp"
             android:textColor="@color/on_surface_dark"
-            android:alpha="0.4"
+            android:alpha="0.3"
             android:fontFamily="sans-serif"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:maxLines="2"
             android:ellipsize="end" />
     </LinearLayout>
