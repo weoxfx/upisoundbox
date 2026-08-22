@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.UPISoundBox" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_40</item>
+        <item name="colorPrimaryVariant">@color/primary_30</item>
+        <item name="colorOnPrimary">@color/on_primary_dark</item>
+        <item name="colorSecondary">@color/accent_cyan</item>
+        <item name="colorSecondaryVariant">@color/accent_violet</item>
+        <item name="colorOnSecondary">@color/primary_10</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="android:colorBackground">@color/surface_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="colorOutline">@color/outline_dark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+    </style>
+
+    <style name="Theme.UPISoundBox.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="GlassCard">
+        <item name="android:background">@drawable/glass_dark</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:elevation">4dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+
+    <style name="GlassCard.Light">
+        <item name="android:background">@drawable/glass_light</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.HeadlineLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.TitleLarge">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.BodyMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="TextAppearance.UPISoundBox.LabelLarge">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/accent_cyan</item>
+        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.Button" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/glass_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:strokeColor">@color/outline_dark</item>
+        <item name="android:strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface_glass_dark</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemBackground">@android:color/transparent</item>
+        <item name="itemTextColor">@color/on_surface_dark</item>
+        <item name="itemIconTint">@color/on_surface_dark</item>
+        <item name="backgroundTint">@color/surface_glass_dark</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <style name="Widget.UPISoundBox.BottomNavigation.Active">
+        <item name="android:textColor">@color/accent_cyan</item>
+        <item name="android:iconTint">@color/accent_cyan</item>
+    </style>
+</resources>

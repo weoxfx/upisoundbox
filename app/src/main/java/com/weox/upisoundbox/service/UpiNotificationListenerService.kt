@@ -8,6 +8,7 @@ import android.media.MediaPlayer
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
+import com.weox.upisoundbox.model.PaymentHistoryItem
 import com.weox.upisoundbox.net.VoiceCache
 import com.weox.upisoundbox.parser.ParserRegistry
 import com.weox.upisoundbox.parser.PaymentEvent
@@ -36,15 +37,12 @@ class UpiNotificationListenerService : NotificationListenerService() {
         val pkg = sbn.packageName
         Log.d(TAG, "onNotificationPosted from package: $pkg")
 
-        // Only look at apps in our known list — cheap early exit for everything else.
         val parser = ParserRegistry.forPackage(pkg)
         if (parser == null) {
             Log.d(TAG, "No parser registered for $pkg, ignoring")
             return
         }
 
-        // Our own package (test notifications) always passes through —
-        // it's never something the user "selects" in onboarding.
         val isSelfTest = pkg == applicationContext.packageName
         if (!isSelfTest) {
             val selectedApps = SelectedAppsStore.getSelected(applicationContext)
@@ -63,11 +61,20 @@ class UpiNotificationListenerService : NotificationListenerService() {
         }
         Log.d(TAG, "Parsed payment: $event")
 
+        saveToHistory(event)
         handlePaymentEvent(event)
     }
 
+    private fun saveToHistory(event: PaymentEvent) {
+        val item = PaymentHistoryStore.createItem(
+            amountRupees = event.amountRupees,
+            sourceApp = event.sourceApp,
+            rawText = event.rawText
+        )
+        PaymentHistoryStore.addPayment(applicationContext, item)
+    }
+
     private fun handlePaymentEvent(event: PaymentEvent) {
-        // Fetch cached/generated audio for this amount, then play it.
         VoiceCache.getAudioForAmount(applicationContext, event.amountRupees) { audioFilePath ->
             if (audioFilePath == null) {
                 Log.e(TAG, "No audio available for amount ${event.amountRupees}")
@@ -78,9 +85,6 @@ class UpiNotificationListenerService : NotificationListenerService() {
     }
 
     private fun playAlert(filePath: String) {
-        // Bump the ALARM stream specifically — USAGE_ALARM below routes
-        // playback through that stream, not STREAM_MUSIC, so raising the
-        // wrong one leaves the alert silent even though everything else works.
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
         audioManager.setStreamVolume(
             AudioManager.STREAM_ALARM,
@@ -90,7 +94,7 @@ class UpiNotificationListenerService : NotificationListenerService() {
         Log.d(TAG, "Set STREAM_ALARM volume to max ($maxVolume)")
 
         val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_ALARM) // behaves closer to an alarm than background music
+            .setUsage(AudioAttributes.USAGE_ALARM)
             .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
             .build()
 

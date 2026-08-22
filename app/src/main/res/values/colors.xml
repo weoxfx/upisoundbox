@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_10">#1A1A2E</color>
+    <color name="primary_20">#16213E</color>
+    <color name="primary_30">#0F3460</color>
+    <color name="primary_40">#533483</color>
+    <color name="primary_50">#E94560</color>
+
+    <color name="accent_cyan">#00D2FF</color>
+    <color name="accent_violet">#7B2CBF</color>
+    <color name="accent_emerald">#00E5A0</color>
+
+    <color name="surface_glass_dark">#E31E293B</color>
+    <color name="surface_glass_light">#CCFFFFFF</color>
+    <color name="surface_dark">#0F172A</color>
+    <color name="surface_light">#F8FAFC</color>
+
+    <color name="on_primary_dark">#E2E8F0</color>
+    <color name="on_primary_light">#1E293B</color>
+    <color name="on_surface_dark">#F1F5F9</color>
+    <color name="on_surface_light">#0F172A</color>
+
+    <color name="outline_dark">#33FFFFFF</color>
+    <color name="outline_light">#334155</color>
+
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    <color name="info">#3B82F6</color>
+
+    <color name="gradient_start">#0F172A</color>
+    <color name="gradient_mid">#1E1B4B</color>
+    <color name="gradient_end">#312E81</color>
+
+    <color name="shadow_color">#000000</color>
+</resources>

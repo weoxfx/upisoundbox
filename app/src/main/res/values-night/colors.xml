@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_10">#1E293B</color>
+    <color name="primary_20">#334155</color>
+    <color name="primary_30">#475569</color>
+    <color name="primary_40">#6366F1</color>
+    <color name="primary_50">#818CF8</color>
+
+    <color name="accent_cyan">#06B6D4</color>
+    <color name="accent_violet">#8B5CF6</color>
+    <color name="accent_emerald">#34D399</color>
+
+    <color name="surface_glass">#CC1E293B</color>
+    <color name="surface_dark">#0F172A</color>
+    <color name="surface_light">#F8FAFC</color>
+
+    <color name="on_primary_dark">#F8FAFC</color>
+    <color name="on_primary_light">#1E293B</color>
+    <color name="on_surface_dark">#F1F5F9</color>
+    <color name="on_surface_light">#0F172A</color>
+
+    <color name="outline_dark">#33FFFFFF</color>
+    <color name="outline_light">#E2E8F0</color>
+
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    <color name="info">#3B82F6</color>
+
+    <color name="gradient_start">#0F172A</color>
+    <color name="gradient_mid">#1E1B4B</color>
+    <color name="gradient_end">#312E81</color>
+</resources>

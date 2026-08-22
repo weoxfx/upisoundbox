@@ -29,7 +29,7 @@ object TestNotificationSender {
 
         // "TESTPAY" is the marker TestSelfParser looks for — must match exactly.
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.stat_notify_chat)
+            .setSmallIcon(R.drawable.ic_notification_small)
             .setContentTitle("TESTPAY received")
             .setContentText("₹$amountRupees received from Test User")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
