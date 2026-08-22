@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Android 11+ package visibility: without this, PackageManager can't
+         see whether these apps are installed at all. Add every UPI app
+         you plan to support here. -->
+    <queries>
+        <package android:name="com.google.android.apps.nbu.paisa.user" /> <!-- GPay -->
+        <package android:name="com.phonepe.app" />                        <!-- PhonePe -->
+        <package android:name="net.one97.paytm" />                        <!-- Paytm -->
+        <package android:name="in.org.npci.upiapp" />                     <!-- BHIM -->
+        <package android:name="in.amazon.mShop.android.shopping" />       <!-- Amazon Pay (bundled in main app) -->
+    </queries>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:label="UPI Sound Box"
+        
+        android:theme="@style/Theme.AppCompat.DayNight">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- This is the core piece: Android requires the user to grant
+             "Notification access" manually in Settings — there's no
+             runtime permission dialog for this. MainActivity should deep
+             link the user to that settings screen during onboarding. -->
+        <service
+            android:name=".service.UpiNotificationListenerService"
+            android:label="UPI Sound Box Listener"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>

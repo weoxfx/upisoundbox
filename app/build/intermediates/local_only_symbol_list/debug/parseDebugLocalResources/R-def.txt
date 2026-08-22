@@ -1,0 +1,8 @@
+R_DEF: Internal format may change without notice
+local
+id appListView
+id grantNotificationAccessButton
+id saveSelectionButton
+id sendTestNotificationButton
+layout activity_main
+string app_name
