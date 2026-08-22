@@ -97,35 +97,37 @@ class AppsFragment : Fragment() {
         val previouslySelected = SelectedAppsStore.getSelected(requireContext())
 
         installed.forEach { (pkg, label) ->
-            val card = ItemAppCardBinding.inflate(
-                LayoutInflater.from(requireContext()),
-                binding.layoutAppCards,
-                true
-            )
+            val cardView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.item_app_card, binding.layoutAppCards, true)
+                as com.google.android.material.card.MaterialCardView
 
-            val cardView = card.root as com.google.android.material.card.MaterialCardView
             cardView.tag = pkg
             cardView.setOnClickListener {
-                val cb = card.cbAppSelected
+                val cb = cardView.findViewById<android.widget.CheckBox>(R.id.cb_app_selected)
                 cb.isChecked = !cb.isChecked
             }
 
-            card.tvAppName.text = label
-            card.tvAppStatus.text = if (pkg in previouslySelected) {
+            val tvAppName = cardView.findViewById<android.widget.TextView>(R.id.tv_app_name)
+            val tvAppStatus = cardView.findViewById<android.widget.TextView>(R.id.tv_app_status)
+            val cbAppSelected = cardView.findViewById<android.widget.CheckBox>(R.id.cb_app_selected)
+            val ivAppIcon = cardView.findViewById<android.widget.ImageView>(R.id.iv_app_icon)
+
+            tvAppName.text = label
+            tvAppStatus.text = if (pkg in previouslySelected) {
                 getString(R.string.status_active)
             } else {
                 getString(R.string.status_inactive)
             }
-            card.tvAppStatus.setTextColor(
+            tvAppStatus.setTextColor(
                 resources.getColor(
                     if (pkg in previouslySelected) R.color.accent_emerald else R.color.error,
                     null
                 )
             )
-            card.cbAppSelected.isChecked = pkg in previouslySelected
+            cbAppSelected.isChecked = pkg in previouslySelected
 
             val colorRes = appIconColors[pkg] ?: R.color.primary_40
-            card.ivAppIcon.setBackgroundColor(resources.getColor(colorRes, null))
+            ivAppIcon.setBackgroundColor(resources.getColor(colorRes, null))
 
             cardView.startAnimation(
                 AnimationUtils.loadAnimation(context, R.anim.fade_in)

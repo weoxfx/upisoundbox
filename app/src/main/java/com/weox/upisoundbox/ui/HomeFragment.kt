@@ -132,13 +132,13 @@ class HomeFragment : Fragment() {
 
         if (isActive) {
             dot.setImageResource(R.drawable.status_dot_active)
-            title.text = R.string.listening_for_payments
+            title.text = getString(R.string.listening_for_payments)
             desc.text = getString(R.string.status_active)
             btn.visibility = View.VISIBLE
             btn.isEnabled = true
         } else {
             dot.setImageResource(R.drawable.status_dot_inactive)
-            title.text = R.string.status_inactive
+            title.text = getString(R.string.status_inactive)
             desc.text = getString(R.string.grant_notification_access)
             btn.visibility = View.GONE
         }

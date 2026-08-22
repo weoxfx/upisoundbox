@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
+import com.weox.upisoundbox.R
 
 /**
  * DEBUG helper: posts a notification from this app itself, worded so that
