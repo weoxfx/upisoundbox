@@ -44,35 +44,35 @@
     <style name="TextAppearance.UPISoundBox.HeadlineLarge">
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/on_surface_dark</item>
-        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:letterSpacing">-0.02</item>
     </style>
 
     <style name="TextAppearance.UPISoundBox.TitleLarge">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/on_surface_dark</item>
-        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="TextAppearance.UPISoundBox.BodyLarge">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/on_surface_dark</item>
-        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:alpha">0.8</item>
     </style>
 
     <style name="TextAppearance.UPISoundBox.BodyMedium">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/on_surface_dark</item>
-        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:alpha">0.7</item>
     </style>
 
     <style name="TextAppearance.UPISoundBox.LabelLarge">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/accent_cyan</item>
-        <item name="android:fontFamily">@android:font/roboto</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
