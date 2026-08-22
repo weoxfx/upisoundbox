@@ -89,8 +89,8 @@
     </style>
 
     <style name="Widget.UPISoundBox.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:strokeColor">@color/outline_dark</item>
-        <item name="android:strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outline_dark</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
     <style name="Widget.UPISoundBox.Card" parent="Widget.Material3.CardView.Elevated">
