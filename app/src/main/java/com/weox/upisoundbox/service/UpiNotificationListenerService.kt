@@ -78,13 +78,16 @@ class UpiNotificationListenerService : NotificationListenerService() {
     }
 
     private fun playAlert(filePath: String) {
-        // Bump media volume up so the alert is actually audible in a shop.
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        // Bump the ALARM stream specifically — USAGE_ALARM below routes
+        // playback through that stream, not STREAM_MUSIC, so raising the
+        // wrong one leaves the alert silent even though everything else works.
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
         audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
+            AudioManager.STREAM_ALARM,
             maxVolume,
             0
         )
+        Log.d(TAG, "Set STREAM_ALARM volume to max ($maxVolume)")
 
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ALARM) // behaves closer to an alarm than background music
@@ -96,15 +99,24 @@ class UpiNotificationListenerService : NotificationListenerService() {
             .build()
         audioManager.requestAudioFocus(focusRequest)
 
-        MediaPlayer().apply {
-            setAudioAttributes(audioAttributes)
-            setDataSource(filePath)
-            setOnCompletionListener {
-                audioManager.abandonAudioFocusRequest(focusRequest)
-                release()
+        try {
+            MediaPlayer().apply {
+                setAudioAttributes(audioAttributes)
+                setDataSource(filePath)
+                setOnCompletionListener {
+                    audioManager.abandonAudioFocusRequest(focusRequest)
+                    release()
+                }
+                setOnErrorListener { _, what, extra ->
+                    Log.e(TAG, "MediaPlayer error: what=$what extra=$extra")
+                    true
+                }
+                prepare()
+                start()
+                Log.d(TAG, "Playback started for $filePath")
             }
-            prepare()
-            start()
+        } catch (e: Exception) {
+            Log.e(TAG, "Playback failed", e)
         }
     }
 
