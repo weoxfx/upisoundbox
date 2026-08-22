@@ -19,13 +19,29 @@ class UpiNotificationListenerService : NotificationListenerService() {
     override fun onCreate() {
         super.onCreate()
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        Log.d(TAG, "Service onCreate — listener process started")
+    }
+
+    override fun onListenerConnected() {
+        super.onListenerConnected()
+        Log.d(TAG, "onListenerConnected — system has bound the listener")
+    }
+
+    override fun onListenerDisconnected() {
+        super.onListenerDisconnected()
+        Log.d(TAG, "onListenerDisconnected — system unbound the listener")
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         val pkg = sbn.packageName
+        Log.d(TAG, "onNotificationPosted from package: $pkg")
 
         // Only look at apps in our known list — cheap early exit for everything else.
-        val parser = ParserRegistry.forPackage(pkg) ?: return
+        val parser = ParserRegistry.forPackage(pkg)
+        if (parser == null) {
+            Log.d(TAG, "No parser registered for $pkg, ignoring")
+            return
+        }
 
         // Our own package (test notifications) always passes through —
         // it's never something the user "selects" in onboarding.
@@ -38,8 +54,13 @@ class UpiNotificationListenerService : NotificationListenerService() {
         val extras = sbn.notification.extras
         val title = extras.getCharSequence("android.title")?.toString()
         val text = extras.getCharSequence("android.text")?.toString()
+        Log.d(TAG, "Notification content — title: '$title', text: '$text'")
 
-        val event = parser.tryParse(title, text) ?: return
+        val event = parser.tryParse(title, text)
+        if (event == null) {
+            Log.d(TAG, "Parser did not recognize this as a payment notification")
+            return
+        }
         Log.d(TAG, "Parsed payment: $event")
 
         handlePaymentEvent(event)
