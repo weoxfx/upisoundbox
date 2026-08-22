@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit
 object VoiceCache {
     // Point this at your own backend, not ElevenLabs directly.
     private const val BACKEND_BASE_URL = "https://your-backend.example.com"
+    private const val TAG = "UpiSoundBox"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
@@ -37,6 +39,7 @@ object VoiceCache {
     ) {
         val cacheFile = fileForAmount(context, amountRupees)
         if (cacheFile.exists()) {
+            Log.d(TAG, "Using cached audio: ${cacheFile.absolutePath}")
             callback(cacheFile.absolutePath)
             return
         }
@@ -50,6 +53,7 @@ object VoiceCache {
 
                 client.newCall(request).execute().use { response ->
                     if (!response.isSuccessful) {
+                        Log.d(TAG, "Backend call failed (${response.code}), falling back to on-device TTS")
                         fallbackToOnDeviceTts(context, amountRupees, cacheFile, callback)
                         return@Thread
                     }
@@ -63,6 +67,7 @@ object VoiceCache {
             } catch (e: Exception) {
                 // Backend unreachable (e.g. it doesn't exist yet) — fall back so
                 // you can still test the pipeline end to end on-device.
+                Log.d(TAG, "Backend unreachable (${e.message}), falling back to on-device TTS")
                 fallbackToOnDeviceTts(context, amountRupees, cacheFile, callback)
             }
         }.start()
@@ -83,6 +88,7 @@ object VoiceCache {
         var tts: TextToSpeech? = null
         tts = TextToSpeech(context) { status ->
             if (status != TextToSpeech.SUCCESS) {
+                Log.e(TAG, "TextToSpeech init failed with status $status")
                 mainHandler.post { callback(null) }
                 tts?.shutdown()
                 return@TextToSpeech
@@ -91,14 +97,18 @@ object VoiceCache {
 
             val utteranceId = "amount_${System.currentTimeMillis()}"
             tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                override fun onStart(id: String?) {}
+                override fun onStart(id: String?) {
+                    Log.d(TAG, "TTS synthesis started")
+                }
                 override fun onDone(id: String?) {
+                    Log.d(TAG, "TTS synthesis done, file exists: ${outputFile.exists()}, size: ${outputFile.length()}")
                     mainHandler.post { callback(outputFile.absolutePath) }
                     tts?.shutdown()
                 }
 
                 @Deprecated("Deprecated in API, required for interface")
                 override fun onError(id: String?) {
+                    Log.e(TAG, "TTS synthesis error")
                     mainHandler.post { callback(null) }
                     tts?.shutdown()
                 }
@@ -110,9 +120,11 @@ object VoiceCache {
                 "%.2f".format(amountRupees)
             }
             val phrase = "Rupees $amountText received"
+            Log.d(TAG, "Synthesizing phrase: '$phrase' to ${outputFile.absolutePath}")
 
             val params = Bundle()
-            tts?.synthesizeToFile(phrase, params, outputFile, utteranceId)
+            val result = tts?.synthesizeToFile(phrase, params, outputFile, utteranceId)
+            Log.d(TAG, "synthesizeToFile call returned: $result")
         }
     }
 
